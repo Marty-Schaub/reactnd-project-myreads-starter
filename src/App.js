@@ -9,16 +9,33 @@ import './App.css'
 
 
 class BooksApp extends React.Component {
+  constructor( props ){
+  super( props );
+  this.handleChange = this.handleChange.bind(this);
+}
   state = {
     books: [], query:"",sbooks:[] }
 
-  componentDidMount(){
-  BooksAPI.getAll().then ((books) => {
+//The async code below is added from the suggestion of the project reviewer
+  async componentDidMount(){
+    const books = await BooksAPI.getAll()
     this.setState({books})
     console.log(books)
 
-})
 }
+
+//this handles moving the books
+  handleChange=(book,shelf)=>{
+    const myId =book.id
+    BooksAPI.update(book, shelf).then(() => {
+    book.id =myId
+    book.shelf=shelf;
+    this.setState({value:myId})
+    this.setState({shelf:shelf})
+    })
+    console.log(book.shelf, myId, this.state.shelf)
+    }
+
   render() {
 
     return (
@@ -33,6 +50,7 @@ class BooksApp extends React.Component {
               <Route exact path='/' render={() => (
                 <BookList
                   books={this.state.books}
+                  handleChange={this.handleChange}
                   />
               )}/>
               </div>
@@ -50,6 +68,7 @@ class BooksApp extends React.Component {
               books={this.state.books}
               sbooks={this.state.sbooks}
               query={this.state.query}
+              handleChange={this.handleChange}
             />
             </ErrorBoundary>
           )}/>

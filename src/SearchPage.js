@@ -34,32 +34,22 @@ componentWillMount(){
 }
 
 
-  //this handles moving the books
-    handleChange=(book,shelf)=>{
-      const myId =book.id
-      BooksAPI.update(book, shelf).then(() => {
-      book.id =myId
-      book.shelf=shelf;
-      this.setState({value:myId})
-      this.setState({shelf:shelf})
-      })
-      console.log(book.shelf, myId, this.state.shelf)
-      }
+
 
     render(){
-      
+
       const{books,sbooks}=this.props
       const{change,query} = this.state
       let showingBooks = (books)
-
       if(query&&change===true){
 
         if (this.state.sbooks.length>0){
-
         showingBooks = this.state.sbooks
         showingBooks.sort(sortBy('title'))
+        console.log (showingBooks)
         }
       }
+
 
       return(
       <ErrorBoundary>
@@ -83,10 +73,11 @@ componentWillMount(){
             <li key={book.id}>
               <div className="book">
                 <div className="book-top">
-                  <div className="book-cover" style={{ width: 128, height: 193, backgroundImage:  `url(${book.imageLinks.thumbnail})` }}></div>
+                  <div className="book-cover" style={{ width: 128, height: 193, backgroundImage:  `url(${book.imageLinks.smallThumbnail})` }}></div>
+                  <div className="new-imgage"></div>
                   <div className="book-shelf-changer">
                   <select value={this.state.value}
-                  onChange={event=>this.handleChange(book,event.target.value)}>
+                  onChange={event=>this.props.handleChange(book,event.target.value)}>
                     <option value="move" disabled>Move to...</option>
                     <option value="blanksocreadingworks" ></option>
                     <option value="currentlyReading">{book.shelf==='currentlyReading'&&'*Currently Reading'}{book.shelf!=='currentlyReading'&&'Currently Reading'}</option>
