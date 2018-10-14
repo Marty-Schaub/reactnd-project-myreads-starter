@@ -173,3 +173,12 @@ body, .app {
   text-align: center;
   font-size: 0.8em;
 }
+.book-cover li:before {
+  content:"\2714\0020";
+}
+.selectedShelf{
+  background: #eee;
+  font-family: arial;
+  font-weight: bold;
+
+}

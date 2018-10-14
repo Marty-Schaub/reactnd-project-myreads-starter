@@ -1,6 +1,5 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import BookShelf from './BookShelf'
 
 class BookList extends React.Component{
   constructor (props){
@@ -38,12 +37,44 @@ render() {
                 <div className="book-shelf-changer">
                 <select value={this.state.value}
                 onChange={event=>this.props.handleChange(book,event.target.value)}>
-                  <option value="move" disabled>Move to...</option>
-                  <option value="blanksocreadingworks" ></option>
-                  <option value="currentlyReading">* Currently Reading</option>
-                  <option value="wantToRead">Want to Read</option>
-                  <option value="read">Read</option>
-                  <option value="none">None</option>
+                <option value="" >Move to...</option>
+                {(()=>{
+                  switch(book.shelf){
+                    case 'currentlyReading':
+                      return <option value="currentlyReading" className="selectedShelf">*Currently Reading</option>
+                    default:
+                      return <option value="currentlyReading">Currently Reading</option>
+                  }
+                })()}
+                {(()=>{
+                  switch(book.shelf){
+                    case 'wantToRead':
+                      return <option value="wantToRead" className="selectedShelf">*Want To Read</option>
+                    default:
+                      return <option value="wantToRead">Want To Read</option>
+                  }
+                })()}
+                {(()=>{
+                  switch(book.shelf){
+                    case 'read':
+                      return <option value="read" className="selectedShelf">*Read</option>
+                    default:
+                      return <option value="read">Read</option>
+                  }
+                })()}
+
+                  {(()=>{
+                    switch(book.shelf){
+                      case 'currentlyReading':
+                      case 'read':
+                      case 'wantToRead':
+                        return <option value="none">None</option>
+
+                      default:
+                        return <option value="none" className="selectedShelf">*None</option>
+                    }
+                  })()}
+
                 </select>
                 </div>
               </div>
@@ -70,12 +101,44 @@ render() {
                 <div className="book-shelf-changer">
                 <select value={this.state.value}
                 onChange={event=>this.props.handleChange(book,event.target.value)}>
-                  <option value="move" disabled>Move to...</option>
-                  <option value="blanksocreadingworks" ></option>
-                  <option value="currentlyReading">Currently Reading</option>
-                  <option value="wantToRead">* Want to Read</option>
-                  <option value="read">Read</option>
-                  <option value="none">None</option>
+                <option value="" >Move to...</option>
+                {(()=>{
+                  switch(book.shelf){
+                    case 'currentlyReading':
+                      return <option value="currentlyReading" className="selectedShelf">*Currently Reading</option>
+                    default:
+                      return <option value="currentlyReading">Currently Reading</option>
+                  }
+                })()}
+                {(()=>{
+                  switch(book.shelf){
+                    case 'wantToRead':
+                      return <option value="wantToRead" className="selectedShelf">*Want To Read</option>
+                    default:
+                      return <option value="wantToRead">Want To Read</option>
+                  }
+                })()}
+                {(()=>{
+                  switch(book.shelf){
+                    case 'read':
+                      return <option value="read" className="selectedShelf">*Read</option>
+                    default:
+                      return <option value="read">Read</option>
+                  }
+                })()}
+
+                  {(()=>{
+                    switch(book.shelf){
+                      case 'currentlyReading':
+                      case 'read':
+                      case 'wantToRead':
+                        return <option value="none">None</option>
+
+                      default:
+                        return <option value="none" className="selectedShelf">*None</option>
+                    }
+                  })()}
+
                 </select>
                 </div>
               </div>
@@ -102,12 +165,44 @@ render() {
                 <div className="book-shelf-changer">
                 <select value={this.state.value}
                 onChange={event=>this.props.handleChange(book,event.target.value)}>
-                  <option value="move" disabled>Move to...</option>
-                  <option value="blanksocreadingworks" ></option>
-                  <option value="currentlyReading">Currently Reading</option>
-                  <option value="wantToRead">Want to Read</option>
-                  <option value="read">* Read</option>
-                  <option value="none">None</option>
+                <option value="" >Move to...</option>
+                {(()=>{
+                  switch(book.shelf){
+                    case 'currentlyReading':
+                      return <option value="currentlyReading" className="selectedShelf">*Currently Reading</option>
+                    default:
+                      return <option value="currentlyReading">Currently Reading</option>
+                  }
+                })()}
+                {(()=>{
+                  switch(book.shelf){
+                    case 'wantToRead':
+                      return <option value="wantToRead" className="selectedShelf">*Want To Read</option>
+                    default:
+                      return <option value="wantToRead">Want To Read</option>
+                  }
+                })()}
+                {(()=>{
+                  switch(book.shelf){
+                    case 'read':
+                      return <option value="read" className="selectedShelf">*Read</option>
+                    default:
+                      return <option value="read">Read</option>
+                  }
+                })()}
+
+                  {(()=>{
+                    switch(book.shelf){
+                      case 'currentlyReading':
+                      case 'read':
+                      case 'wantToRead':
+                        return <option value="none">None</option>
+
+                      default:
+                        return <option value="none" className="selectedShelf">*None</option>
+                    }
+                  })()}
+
                 </select>
                 </div>
               </div>
@@ -120,7 +215,7 @@ render() {
     </div>
   </div>
 </div>
-<BookShelf />
+
 </div>
     )
   }

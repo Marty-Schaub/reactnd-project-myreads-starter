@@ -14,26 +14,26 @@ class BooksApp extends React.Component {
   this.handleChange = this.handleChange.bind(this);
 }
   state = {
-    books: [], query:"",sbooks:[] }
+    books: [], query:"",sbooks:[],value:"",shelf:"" }
 
 //The async code below is added from the suggestion of the project reviewer
   async componentDidMount(){
     const books = await BooksAPI.getAll()
     this.setState({books})
-    console.log(books)
-
 }
 
 //this handles moving the books
   handleChange=(book,shelf)=>{
     const myId =book.id
+    let myShelf = ''
     BooksAPI.update(book, shelf).then(() => {
+    myShelf=shelf
     book.id =myId
-    book.shelf=shelf;
+    book.shelf=myShelf;
     this.setState({value:myId})
-    this.setState({shelf:shelf})
+    this.setState({shelf:myShelf})
     })
-    console.log(book.shelf, myId, this.state.shelf)
+  
     }
 
   render() {
@@ -69,6 +69,7 @@ class BooksApp extends React.Component {
               sbooks={this.state.sbooks}
               query={this.state.query}
               handleChange={this.handleChange}
+              shelf={this.state.shelf}
             />
             </ErrorBoundary>
           )}/>
