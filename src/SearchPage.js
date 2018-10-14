@@ -3,6 +3,7 @@ import * as BooksAPI from './BooksAPI'
 import sortBy from 'sort-by'
 import { Link } from 'react-router-dom'
 import ErrorBoundary from './ErrorBoundary'
+import './App.css'
 
 class SearchPage extends React.Component{
 
@@ -23,23 +24,21 @@ clearQuery = ()=> {
 }
 
 
-componentWillMount(){
+async componentWillMount(){
 
   const{query} = this.state
-  if(query){
-    BooksAPI.search(query).then((sBooks) => {
-      this.setState({sbooks: sBooks})
-  })
+  if (query.length>1){
+  const sbooks= await BooksAPI.search(query)
+      this.setState({sbooks})
+      console.log(sbooks)
+    }
 }
-}
-
-
-
 
     render(){
 
       const{books,sbooks}=this.props
       const{change,query} = this.state
+
       let showingBooks = (books)
       if(query&&change===true){
 
@@ -54,6 +53,7 @@ componentWillMount(){
       return(
       <ErrorBoundary>
       <div className="search-books">
+
         <div className="search-books-bar">
         <Link to="/" className="close-search" >Close</Link>
         <div className="search-books-input-wrapper">
@@ -69,11 +69,10 @@ componentWillMount(){
 
       <ol className="books-grid">
       {showingBooks.map((book) =>
-
             <li key={book.id}>
               <div className="book">
                 <div className="book-top">
-                  <div className="book-cover" style={{ width: 128, height: 193, backgroundImage:  `url(${book.imageLinks.smallThumbnail})` }}></div>
+                 <div className="book-cover" style={{ width: 128, height: 193, backgroundImage:  `url(${book.imageLinks.smallThumbnail})` }}></div>
                   <div className="new-imgage"></div>
                   <div className="book-shelf-changer">
                   <select value={this.state.value}
@@ -103,6 +102,7 @@ componentWillMount(){
                 <div className="book-authors">{book.authors}</div>
               </div>
             </li>
+
         )}
       </ol>
 

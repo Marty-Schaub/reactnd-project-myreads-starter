@@ -1,12 +1,12 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-// import * as BooksAPI from './BooksAPI'
+import BookShelf from './BookShelf'
 
 class BookList extends React.Component{
   constructor (props){
     super (props);
-    this.state = {value: '', shelf:''}
-
+    this.state = {value: '', shelf:'', books:'', title:''}
+//
   }
 
   static propTypes ={
@@ -120,7 +120,7 @@ render() {
     </div>
   </div>
 </div>
-
+<BookShelf />
 </div>
     )
   }
